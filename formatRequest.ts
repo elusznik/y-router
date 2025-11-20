@@ -5,6 +5,17 @@ interface MessageCreateParamsBase {
   temperature?: number;
   tools?: any[];
   stream?: boolean;
+  reasoning?: {
+    max_tokens?: number;
+    effort?: 'high' | 'medium' | 'low' | 'minimal' | 'none';
+    exclude?: boolean;
+    enabled?: boolean;
+  };
+  reasoning_effort?: string; // Keep for backward compatibility if needed, but reasoning.effort is preferred
+  thinking?: {
+    type: "enabled";
+    budget_tokens: number;
+  };
 }
 
 
@@ -115,7 +126,7 @@ export function mapModel(anthropicModel: string): string {
 }
 
 export function formatAnthropicToOpenAI(body: MessageCreateParamsBase): any {
-  const { model, messages, system = [], temperature, tools, stream } = body;
+  const { model, messages, system = [], temperature, tools, stream, reasoning, reasoning_effort, thinking } = body;
 
   const openAIMessages = Array.isArray(messages)
     ? messages.flatMap((anthropicMessage) => {
@@ -228,6 +239,23 @@ export function formatAnthropicToOpenAI(body: MessageCreateParamsBase): any {
     temperature,
     stream,
   };
+
+  if (reasoning) {
+    data.reasoning = reasoning;
+  } else if (thinking && thinking.type === 'enabled') {
+    data.reasoning = {
+      max_tokens: thinking.budget_tokens
+    };
+  } else {
+    // Default to enabled and high effort if no reasoning/thinking provided
+    data.reasoning = {
+      effort: 'high'
+    };
+  }
+
+  if (reasoning_effort) {
+    data.reasoning_effort = reasoning_effort;
+  }
 
   if (tools) {
     data.tools = tools.map((item: any) => ({

@@ -2,10 +2,20 @@ export function formatOpenAIToAnthropic(completion: any, model: string): any {
   const messageId = "msg_" + Date.now();
 
   let content: any = [];
+  
+  // Handle reasoning content from OpenRouter
+  if (completion.choices[0].message.reasoning) {
+    content.push({
+      type: "thinking",
+      thinking: completion.choices[0].message.reasoning,
+      signature: "openrouter-reasoning" // Placeholder signature
+    });
+  }
+
   if (completion.choices[0].message.content) {
-    content = [{ text: completion.choices[0].message.content, type: "text" }];
+    content.push({ text: completion.choices[0].message.content, type: "text" });
   } else if (completion.choices[0].message.tool_calls) {
-    content = completion.choices[0].message.tool_calls.map((item: any) => {
+    const toolCalls = completion.choices[0].message.tool_calls.map((item: any) => {
       return {
         type: 'tool_use',
         id: item.id,
@@ -13,6 +23,7 @@ export function formatOpenAIToAnthropic(completion: any, model: string): any {
         input: item.function?.arguments ? JSON.parse(item.function.arguments) : {},
       };
     });
+    content.push(...toolCalls);
   }
 
   const result = {
