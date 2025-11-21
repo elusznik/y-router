@@ -1,4 +1,17 @@
 # y-router
+This project is a Cloudflare Worker that acts as an Anthropic→OpenAI proxy.
+
+**Quick dev (Docker Compose)**: Run `docker-compose up -d --build` and open `http://localhost:8787`.
+
+**Debugging note**: The development setup runs `wrangler@4` in Docker and removes stale `.wrangler/tmp` on startup. If you still encounter an error about a missing `middleware-loader.entry.ts`, try removing the `.wrangler/tmp` directory locally then restart the Compose service:
+```bash
+rm -rf .wrangler/tmp
+docker compose up -d --build
+```
+
+**If you're building on the host** (e.g. running `wrangler build` outside Docker), ensure you use Wrangler v4 on the host to avoid absolute `/app` path mismatches introduced by older versions: `npx wrangler@4 build` or `npm install --save-dev wrangler@4`.
+
+# y-router
 
 A Cloudflare Worker that translates between Anthropic's Claude API and OpenAI-compatible APIs, enabling you to use Claude Code with OpenRouter and other OpenAI-compatible providers.
 
