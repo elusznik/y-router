@@ -9,7 +9,7 @@ fi
 # Patch Claude Code configuration with optional model override
 node manage-config.js patch "$OVERRIDE_MODEL"
 
-nohup npm run dev > router.log 2>&1 &
+nohup npm run dev -- --port 8787 > router.log 2>&1 &
 echo $! > router.pid
 echo "🚀 Router started in background (PID: $(cat router.pid))"
 echo "📝 Logs are being written to router.log"

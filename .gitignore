@@ -176,3 +176,4 @@ dist
 .router.log
 .router.pid
 .serena/
+.gemini/
