@@ -125,8 +125,10 @@ export function mapModel(anthropicModel: string): string {
   return anthropicModel;
 }
 
-export function formatAnthropicToOpenAI(body: MessageCreateParamsBase): any {
+export function formatAnthropicToOpenAI(body: MessageCreateParamsBase, modelOverride?: string): any {
   const { model, messages, system = [], temperature, tools, stream, reasoning, reasoning_effort, thinking } = body;
+  
+  const targetModel = modelOverride || mapModel(model);
 
   const openAIMessages = Array.isArray(messages)
     ? messages.flatMap((anthropicMessage) => {
@@ -216,7 +218,7 @@ export function formatAnthropicToOpenAI(body: MessageCreateParamsBase): any {
           type: "text",
           text: item.text
         };
-        if (model.includes('claude')) {
+        if (targetModel.includes('claude')) {
           content.cache_control = {"type": "ephemeral"};
         }
         return {
@@ -229,12 +231,12 @@ export function formatAnthropicToOpenAI(body: MessageCreateParamsBase): any {
         content: [{
           type: "text",
           text: system,
-          ...(model.includes('claude') ? { cache_control: {"type": "ephemeral"} } : {})
+          ...(targetModel.includes('claude') ? { cache_control: {"type": "ephemeral"} } : {})
         }]
       }];
 
   const data: any = {
-    model: mapModel(model),
+    model: targetModel,
     messages: [...systemMessages, ...openAIMessages],
     temperature,
     stream,

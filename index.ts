@@ -37,8 +37,8 @@ export default {
     
     if (url.pathname === '/v1/messages' && request.method === 'POST') {
       const anthropicRequest = await request.json();
-      const openaiRequest = formatAnthropicToOpenAI(anthropicRequest);
-      const bearerToken = request.headers.get("X-Api-Key") || 
+      const openaiRequest = formatAnthropicToOpenAI(anthropicRequest, env.MODEL_OVERRIDE);
+      const bearerToken = env.OPENROUTER_API_KEY || request.headers.get("X-Api-Key") || 
         request.headers.get("Authorization")?.replace("Bearer ", "");
 
       const baseUrl = env.OPENROUTER_BASE_URL || 'https://openrouter.ai/api/v1';
