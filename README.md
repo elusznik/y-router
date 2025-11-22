@@ -38,8 +38,17 @@ OPENROUTER_API_KEY="sk-or-..."
 
 ### 3. Run the Router
 
+**Interactive Mode (recommended for dev):**
+
 ```bash
 npm run dev
+```
+
+**Background Mode (recommended for daily use):**
+
+```bash
+./start-detached.sh
+# To stop: ./stop-router.sh
 ```
 
 The router will start at `http://localhost:8787`.
