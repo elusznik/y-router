@@ -175,3 +175,4 @@ dist
 .wrangler/
 .router.log
 .router.pid
+.serena/
