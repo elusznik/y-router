@@ -152,7 +152,7 @@ export function formatAnthropicToOpenAI(body: MessageCreateParamsBase, modelOver
           let textContent = "";
           const toolCalls: any[] = [];
 
-          anthropicMessage.content.forEach((contentPart) => {
+          anthropicMessage.content.forEach((contentPart: any) => {
             if (contentPart.type === "text") {
               textContent += (typeof contentPart.text === "string"
                 ? contentPart.text
@@ -183,7 +183,7 @@ export function formatAnthropicToOpenAI(body: MessageCreateParamsBase, modelOver
           let userTextMessageContent = "";
           const subsequentToolMessages: any[] = [];
 
-          anthropicMessage.content.forEach((contentPart) => {
+          anthropicMessage.content.forEach((contentPart: any) => {
             if (contentPart.type === "text") {
               userTextMessageContent += (typeof contentPart.text === "string"
                 ? contentPart.text

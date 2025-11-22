@@ -62,9 +62,11 @@ claude
 ## Advanced Configuration
 
 ### Model Override
+
 You can force the router to use a specific model by setting `MODEL_OVERRIDE` in `.dev.vars`. This is useful because it allows you to keep `claude-3-5-sonnet` in your Claude Code settings (ensuring compatibility) while actually using a different model backend.
 
 ### API Key Override
+
 Set `OPENROUTER_API_KEY` in `.dev.vars` to use a specific key for OpenRouter requests. This allows you to keep your actual Anthropic key in your global settings if you switch back and forth.
 
 ## Development
@@ -78,6 +80,14 @@ docker-compose up -d
 ```
 
 Make sure to map your `.dev.vars` or set environment variables in `docker-compose.yml`.
+
+## Thanks
+
+Special thanks to these projects that inspired open-claude-router:
+
+- [y-router](https://github.com/yovy-app/y-router)
+- [claude-code-router](https://github.com/musistudio/claude-code-router)
+- [claude-code-proxy](https://github.com/kiyo-e/claude-code-proxy)
 
 ## License
 

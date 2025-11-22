@@ -163,7 +163,18 @@ export const indexHtml = `<!DOCTYPE html>
 
         <div class="content">
             <div class="step">
-                <h2><span class="step-number">1</span>Configuration</h2>
+                <h2><span class="step-number">1</span>Installation</h2>
+                <p>Clone the repository and install dependencies:</p>
+                <div class="code-block-wrapper">
+                    <div class="code-block">git clone https://github.com/elusznik/open-claude-router.git
+cd open-claude-router
+npm install</div>
+                    <button class="copy-button" onclick="copyToClipboard(this, 'git clone https://github.com/elusznik/open-claude-router.git\\ncd open-claude-router\\nnpm install')">Copy</button>
+                </div>
+            </div>
+
+            <div class="step">
+                <h2><span class="step-number">2</span>Configuration</h2>
                 <p>Create a <code>.dev.vars</code> file in the project root:</p>
                 <div class="code-block-wrapper">
                     <div class="code-block"># .dev.vars
@@ -174,7 +185,7 @@ OPENROUTER_API_KEY="sk-or-..."</div>
             </div>
 
             <div class="step">
-                <h2><span class="step-number">2</span>Start Router</h2>
+                <h2><span class="step-number">3</span>Start Router</h2>
                 <div class="code-block-wrapper">
                     <div class="code-block">npm run dev</div>
                     <button class="copy-button" onclick="copyToClipboard(this, 'npm run dev')">Copy</button>
@@ -183,7 +194,7 @@ OPENROUTER_API_KEY="sk-or-..."</div>
             </div>
 
             <div class="step">
-                <h2><span class="step-number">3</span>Connect Claude Code</h2>
+                <h2><span class="step-number">4</span>Connect Claude Code</h2>
                 <p>Add these to your shell config (<code>~/.bashrc</code> or <code>~/.zshrc</code>):</p>
                 <div class="code-block-wrapper">
                     <div class="code-block">export ANTHROPIC_BASE_URL="http://localhost:8787"
