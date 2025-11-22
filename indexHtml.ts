@@ -186,27 +186,22 @@ OPENROUTER_API_KEY="sk-or-..."</div>
 
             <div class="step">
                 <h2><span class="step-number">3</span>Start Router</h2>
+                <p>Run the start script to launch the router and automatically configure Claude Code:</p>
                 <div class="code-block-wrapper">
-                    <div class="code-block">npm run dev</div>
-                    <button class="copy-button" onclick="copyToClipboard(this, 'npm run dev')">Copy</button>
+                    <div class="code-block">./start-detached.sh</div>
+                    <button class="copy-button" onclick="copyToClipboard(this, './start-detached.sh')">Copy</button>
                 </div>
-                <div class="note">Router will start at http://localhost:8787</div>
+                <div class="note">This will backup your settings and point Claude Code to localhost.</div>
             </div>
 
             <div class="step">
-                <h2><span class="step-number">4</span>Connect Claude Code</h2>
-                <p>Add these to your shell config (<code>~/.bashrc</code> or <code>~/.zshrc</code>):</p>
+                <h2><span class="step-number">4</span>Stop & Restore</h2>
+                <p>When finished, stop the router to restore your original settings:</p>
                 <div class="code-block-wrapper">
-                    <div class="code-block">export ANTHROPIC_BASE_URL="http://localhost:8787"
-# Optional: Set a dummy key if you haven't set one yet
-export ANTHROPIC_API_KEY="sk-dummy-key"</div>
-                    <button class="copy-button" onclick="copyToClipboard(this, 'export ANTHROPIC_BASE_URL=&quot;http://localhost:8787&quot;\\nexport ANTHROPIC_API_KEY=&quot;sk-dummy-key&quot;')">Copy</button>
+                    <div class="code-block">./stop-router.sh</div>
+                    <button class="copy-button" onclick="copyToClipboard(this, './stop-router.sh')">Copy</button>
                 </div>
-                <p>Then reload your shell:</p>
-                <div class="code-block-wrapper">
-                    <div class="code-block">source ~/.bashrc  # or source ~/.zshrc</div>
-                    <button class="copy-button" onclick="copyToClipboard(this, 'source ~/.bashrc')">Copy</button>
-                </div>
+                <div class="note"><strong>Important:</strong> Always use this script to ensure your config is restored!</div>
             </div>
         </div>
 

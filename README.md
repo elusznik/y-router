@@ -38,17 +38,30 @@ OPENROUTER_API_KEY="sk-or-..."
 
 ### 3. Run the Router
 
-**Interactive Mode (recommended for dev):**
+### 3. Run the Router
+
+We recommend using the **detached mode scripts**, which automatically configure Claude Code for you.
+
+**Start Router & Patch Config:**
+```bash
+./start-detached.sh
+```
+This script will:
+1. Backup your existing `~/.claude/settings.json`.
+2. Update Claude Code to use the local router (`http://localhost:8787`).
+3. Start the router in the background.
+
+**Stop Router & Restore Config:**
+```bash
+./stop-router.sh
+```
+> [!IMPORTANT]
+> You **MUST** use `./stop-router.sh` to stop the router. This script restores your original `settings.json` (Anthropic defaults). If you just kill the process, your Claude Code configuration will remain pointed at localhost.
+
+### Alternative: Manual Run
 
 ```bash
 npm run dev
-```
-
-**Background Mode (recommended for daily use):**
-
-```bash
-./start-detached.sh
-# To stop: ./stop-router.sh
 ```
 
 The router will start at `http://localhost:8787`.

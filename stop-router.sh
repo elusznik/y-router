@@ -5,6 +5,9 @@ if [ -f router.pid ]; then
     kill $PID
     rm router.pid
     echo "🛑 Router stopped (PID: $PID)"
+    
+    # Restore Claude Code configuration
+    node manage-config.js restore
   else
     echo "⚠️  Router process $PID not found. Removing stale pid file."
     rm router.pid

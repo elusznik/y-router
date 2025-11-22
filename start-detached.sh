@@ -1,4 +1,8 @@
 #!/bin/bash
+
+# Patch Claude Code configuration
+node manage-config.js patch
+
 nohup npm run dev > router.log 2>&1 &
 echo $! > router.pid
 echo "🚀 Router started in background (PID: $(cat router.pid))"
